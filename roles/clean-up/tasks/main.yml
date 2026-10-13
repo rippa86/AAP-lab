@@ -1,0 +1,6 @@
+---
+# tasks file for clean-up
+
+- name: using the file module remove the YOURNAME_report.txt from /tmp/
+
+

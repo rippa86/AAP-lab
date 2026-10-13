@@ -1,0 +1,6 @@
+---
+# tasks file for system_check
+
+- name: Insert sad face here
+  ansible.builtin.debug: 
+    msg: "I'm Sad :( , I don't do anything"

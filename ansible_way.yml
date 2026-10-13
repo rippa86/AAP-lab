@@ -1,0 +1,29 @@
+- hosts: all
+  
+  tasks: 
+    - name: Print Hello World
+      ansible.builtin.debug: 
+        msg: "Checking Services. . ." 
+      
+    - name: "check  firewalld is running" 
+      ansible.builtin.service:
+        name: firewalld
+        state: started
+      register: service_state
+
+    - name: Debug result
+      ansible.builtin.debug: 
+        var: service_state
+
+    - ansible.posix.firewalld_info:
+      become: yes
+      register: firewall_info
+      when: service_state.state == "started"
+
+    - name: Debug result
+      ansible.builtin.debug: 
+        var: firewall_info
+    - name: Audit security permissions of /etc/shadow
+      ansible.builtin.stat:
+        path: /etc/shadow
+      register: shadow_stat

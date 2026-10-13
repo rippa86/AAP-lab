@@ -1,0 +1,17 @@
+- hosts: all
+
+  vars: 
+    check_service: chronyd
+  
+  tasks: 
+    - name: Print Hello World
+      ansible.builtin.debug: 
+        msg: "Checking Services. . ." 
+      
+    - name: "check {{ check_service }} is running" 
+      ansible.builtin.shell: "systemctl status {{ check_service }}"
+      register: service_state
+
+    - name: Debug result
+      ansible.builtin.debug: 
+        var: service_state
