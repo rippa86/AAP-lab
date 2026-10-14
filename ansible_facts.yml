@@ -1,8 +1,19 @@
 - hosts: all
   gather_facts: yes
-  
-  tasks: 
+
+  tasks:
 
     - name: view facts
       ansible.builtin.debug:
         var: ansible_facts
+
+    - name: print single fact
+      ansible.builtin.debug:
+        var: ansible_facts.distribution
+
+    - name: Am I in support?
+      ansible.builtin.debug:
+        msg: "Yes, you're on fully supported RHEL"
+      when:
+        - ansible_facts.distribution == "RedHat"
+        - ansible_facts.distribution_major_version | int > 8
